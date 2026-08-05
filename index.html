@@ -140,7 +140,7 @@ a{color:inherit;text-decoration:none}
   background:linear-gradient(90deg, rgba(0,0,0,0.70) 0%, rgba(0,0,0,0.25) 35%, rgba(0,0,0,0) 65%);
 }
 
-/* --- کتگوری‌ها (۳ ردیف ۴ تایی) --- */
+/* --- کتگوری‌ها (کاملاً سفید، بدون اختلاف رنگ) --- */
 .categories{
   width:94vw;
   max-width:1700px;
@@ -151,38 +151,32 @@ a{color:inherit;text-decoration:none}
   direction:rtl;
 }
 .category{
-  min-height:130px;
+  min-height:140px;
   display:flex;
   flex-direction:column;
   align-items:center;
   justify-content:center;
-  background:#f8f8f8;
+  background:#ffffff; /* تغییر به سفید خالص */
   border:none;
-  box-shadow:0 4px 15px rgba(0,0,0,0.05);
+  box-shadow:none;
   transition:all 0.25s ease;
   text-align:center;
   padding:20px;
 }
 .category:hover{
   transform:translateY(-3px);
-  box-shadow:0 8px 25px rgba(0,0,0,0.08);
 }
 .category img{
-  width:70px;
-  height:70px;
+  width:80px;
+  height:80px;
   object-fit:contain;
   display:block;
-  margin-bottom:10px;
+  margin-bottom:12px;
 }
 .category-title{
   font-size:16px;
   font-weight:600;
   color:var(--black);
-}
-.category-description{
-  color:var(--gray);
-  font-size:12px;
-  margin-top:4px;
 }
 
 .categories{
@@ -213,19 +207,16 @@ a{color:inherit;text-decoration:none}
   padding:0 4px;
 }
 .category{
-  min-height:100px;
+  min-height:110px;
   padding:12px 6px;
 }
 .category img{
-  width:40px;
-  height:40px;
-  margin-bottom:6px;
+  width:50px;
+  height:50px;
+  margin-bottom:8px;
 }
 .category-title{
-  font-size:11px;
-}
-.category-description{
-  font-size:9px;
+  font-size:12px;
 }
 }
 
@@ -238,18 +229,15 @@ a{color:inherit;text-decoration:none}
   padding:0 2px;
 }
 .category{
-  min-height:85px;
+  min-height:95px;
   padding:8px 4px;
 }
 .category img{
-  width:32px;
-  height:32px;
+  width:40px;
+  height:40px;
 }
 .category-title{
-  font-size:10px;
-}
-.category-description{
-  font-size:8px;
+  font-size:11px;
 }
 }
 </style>
@@ -297,72 +285,56 @@ a{color:inherit;text-decoration:none}
     <div class="hero-overlay"></div>
   </section>
 
-  <!-- ۳ ردیف ۴ تایی با عناوین جدید -->
   <section class="categories">
-    <!-- ردیف اول -->
     <a href="#" class="category">
       <img src="icon-cv.png" alt="CV">
       <div class="category-title">رزومه</div>
-      <div class="category-description">نمایش کارنامه</div>
     </a>
     <a href="#" class="category">
       <img src="icon-shop.png" alt="Shop">
       <div class="category-title">فروشگاه</div>
-      <div class="category-description">خرید آثار</div>
     </a>
     <a href="#" class="category">
       <img src="icon-podcast.png" alt="Podcast">
       <div class="category-title">پادکست</div>
-      <div class="category-description">گفتگوهای هنری</div>
     </a>
     <a href="#" class="category">
       <img src="icon-play.png" alt="Play">
-      <div class="category-title">مالتی‌مدیا</div>
-      <div class="category-description">ویدیوهای منتخب</div>
+      <div class="category-title">چندرسانه‌ای</div>
     </a>
 
-    <!-- ردیف دوم -->
     <a href="#" class="category">
       <img src="icon-film.png" alt="Film">
       <div class="category-title">سینما</div>
-      <div class="category-description">سینما و آثار</div>
     </a>
     <a href="#" class="category">
       <img src="icon-home.png" alt="Home">
       <div class="category-title">معماری</div>
-      <div class="category-description">طراحی فضا</div>
     </a>
     <a href="#" class="category">
       <img src="icon-gallery.png" alt="Gallery">
-      <div class="category-title">گرافیک</div>
-      <div class="category-description">طراحی بصری</div>
+      <div class="category-title">ارتباط تصویری</div>
     </a>
     <a href="#" class="category">
       <img src="icon-palette.png" alt="Palette">
       <div class="category-title">نقاشی</div>
-      <div class="category-description">هنرهای تجسمی</div>
     </a>
 
-    <!-- ردیف سوم -->
     <a href="#" class="category">
       <img src="icon-music.png" alt="Music">
       <div class="category-title">موسیقی</div>
-      <div class="category-description">آواها و نغمه‌ها</div>
     </a>
     <a href="#" class="category">
       <img src="icon-statue.png" alt="Statue">
       <div class="category-title">مجسمه‌سازی</div>
-      <div class="category-description">حجم و فرم</div>
     </a>
     <a href="#" class="category">
       <img src="icon-theater.png" alt="Theater">
-      <div class="category-title">تئاتر</div>
-      <div class="category-description">هنر نمایش</div>
+      <div class="category-title">ادبیات نمایشی</div>
     </a>
     <a href="#" class="category">
       <img src="icon-photo.png" alt="Photo">
       <div class="category-title">عکس</div>
-      <div class="category-description">آثار عکاسی</div>
     </a>
   </section>
 </main>
