@@ -109,7 +109,7 @@ a{color:inherit;text-decoration:none}
   padding-top:20px;
 }
 
-/* --- هیرو (آیکون‌های شناور حذف شدند) --- */
+/* --- هیرو --- */
 .hero{
   width:94vw;
   max-width:1700px;
@@ -129,7 +129,6 @@ a{color:inherit;text-decoration:none}
   filter: brightness(1.0) contrast(1.05);
 }
 
-/* --- سایه‌ی هیرو --- */
 .hero-overlay{
   position:absolute;
   inset:0;
@@ -141,11 +140,11 @@ a{color:inherit;text-decoration:none}
   background:linear-gradient(90deg, rgba(0,0,0,0.70) 0%, rgba(0,0,0,0.25) 35%, rgba(0,0,0,0) 65%);
 }
 
-/* --- کتگوری‌ها (بدون خطوط کادر، فاصله‌ی کمتر) --- */
+/* --- کتگوری‌ها (۳ ردیف ۴ تایی) --- */
 .categories{
   width:94vw;
   max-width:1700px;
-  margin:15px auto 20px; /* فاصله از هیرو کمتر شد (30 -> 15) */
+  margin:15px auto 20px;
   padding:0 10px;
   display:grid;
   gap:16px;
@@ -158,7 +157,7 @@ a{color:inherit;text-decoration:none}
   align-items:center;
   justify-content:center;
   background:#f8f8f8;
-  border:none; /* خطوط کادر حذف شدند */
+  border:none;
   box-shadow:0 4px 15px rgba(0,0,0,0.05);
   transition:all 0.25s ease;
   text-align:center;
@@ -186,12 +185,10 @@ a{color:inherit;text-decoration:none}
   margin-top:4px;
 }
 
-/* --- دسکتاپ و موبایل (هر دو ۲ ردیف ۴ تایی) --- */
 .categories{
   grid-template-columns: repeat(4, 1fr);
 }
 
-/* --- تنظیمات تبلت و موبایل (فقط سایزها کوچک‌تر می‌شوند) --- */
 @media(max-width:850px){
 .menu-panel{top:77px;right:4vw;left:4vw}
 .menu-panel-inner{grid-template-columns:1fr;gap:25px;padding:30px 7vw}
@@ -211,7 +208,7 @@ a{color:inherit;text-decoration:none}
 
 .categories{
   width:92vw;
-  margin:12px auto 15px; /* فاصله در تبلت کمتر شد */
+  margin:12px auto 15px;
   gap:8px;
   padding:0 4px;
 }
@@ -236,7 +233,7 @@ a{color:inherit;text-decoration:none}
 .brand{width:140px}
 .header-actions{gap:5px}
 .categories{
-  margin:10px auto 12px; /* فاصله در موبایل کمتر شد */
+  margin:10px auto 12px;
   gap:6px;
   padding:0 2px;
 }
@@ -300,8 +297,9 @@ a{color:inherit;text-decoration:none}
     <div class="hero-overlay"></div>
   </section>
 
-  <!-- ۲ ردیف ۴ تایی، بدون خطوط کادر، با فاصله‌ی کمتر -->
+  <!-- ۳ ردیف ۴ تایی با عناوین جدید -->
   <section class="categories">
+    <!-- ردیف اول -->
     <a href="#" class="category">
       <img src="icon-cv.png" alt="CV">
       <div class="category-title">رزومه</div>
@@ -319,28 +317,52 @@ a{color:inherit;text-decoration:none}
     </a>
     <a href="#" class="category">
       <img src="icon-play.png" alt="Play">
-      <div class="category-title">پخش</div>
+      <div class="category-title">مالتی‌مدیا</div>
       <div class="category-description">ویدیوهای منتخب</div>
     </a>
+
+    <!-- ردیف دوم -->
     <a href="#" class="category">
       <img src="icon-film.png" alt="Film">
-      <div class="category-title">فیلم</div>
+      <div class="category-title">سینما</div>
       <div class="category-description">سینما و آثار</div>
     </a>
     <a href="#" class="category">
       <img src="icon-home.png" alt="Home">
-      <div class="category-title">خانه</div>
-      <div class="category-description">صفحه اصلی</div>
+      <div class="category-title">معماری</div>
+      <div class="category-description">طراحی فضا</div>
     </a>
     <a href="#" class="category">
       <img src="icon-gallery.png" alt="Gallery">
-      <div class="category-title">گالری</div>
-      <div class="category-description">نمایشگاه‌ها</div>
+      <div class="category-title">گرافیک</div>
+      <div class="category-description">طراحی بصری</div>
     </a>
     <a href="#" class="category">
       <img src="icon-palette.png" alt="Palette">
-      <div class="category-title">هنرهای تجسمی</div>
-      <div class="category-description">نقاشی و طرح</div>
+      <div class="category-title">نقاشی</div>
+      <div class="category-description">هنرهای تجسمی</div>
+    </a>
+
+    <!-- ردیف سوم -->
+    <a href="#" class="category">
+      <img src="icon-music.png" alt="Music">
+      <div class="category-title">موسیقی</div>
+      <div class="category-description">آواها و نغمه‌ها</div>
+    </a>
+    <a href="#" class="category">
+      <img src="icon-statue.png" alt="Statue">
+      <div class="category-title">مجسمه‌سازی</div>
+      <div class="category-description">حجم و فرم</div>
+    </a>
+    <a href="#" class="category">
+      <img src="icon-theater.png" alt="Theater">
+      <div class="category-title">تئاتر</div>
+      <div class="category-description">هنر نمایش</div>
+    </a>
+    <a href="#" class="category">
+      <img src="icon-photo.png" alt="Photo">
+      <div class="category-title">عکس</div>
+      <div class="category-description">آثار عکاسی</div>
     </a>
   </section>
 </main>
