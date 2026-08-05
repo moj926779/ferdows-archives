@@ -11,10 +11,10 @@
 body{background:#fff;color:var(--black);font-family:"Vazirmatn","IRANSans",Tahoma,Arial,sans-serif}
 a{color:inherit;text-decoration:none}
 
-/* --- هدر --- */
+/* --- هدر با ساختار چپ‌چین برای هم‌ترازی --- */
 .site-header{
   width:100%;
-  padding:0 3vw 0;
+  padding:0 0 0 3vw; /* فقط از سمت چپ فاصله می‌گیرد تا با هیرو هم‌تراز شود */
   background:#fff;
 }
 .topbar{
@@ -22,16 +22,50 @@ a{color:inherit;text-decoration:none}
   display:flex;
   align-items:center;
   justify-content:space-between;
-  direction:ltr;
+  direction:ltr; /* چپ‌چین برای نگه داشتن لوگو در سمت چپ */
   border-bottom:1px solid var(--line);
+  padding-right:3vw; /* فاصله‌ی سمت راست برای آیکون‌ها */
 }
 
-.brand{width:210px;height:58px;display:flex;align-items:center;justify-content:flex-start}
-.brand img{width:100%;height:100%;object-fit:contain;object-position:left center;display:block}
+.brand{
+  display:flex;
+  align-items:center;
+  justify-content:flex-start;
+  /* سایز لوگو ثابت باقی می‌ماند */
+  width:210px; 
+  height:58px;
+}
+.brand img{
+  width:100%;
+  height:100%;
+  object-fit:contain;
+  object-position:left center;
+  display:block;
+}
 
-.header-actions{display:flex;align-items:center;gap:24px;direction:ltr}
-.icon-button{width:36px;height:36px;display:flex;align-items:center;justify-content:center;color:#111}
-.icon-button svg{width:31px;height:31px;stroke:currentColor;fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.header-actions{
+  display:flex;
+  align-items:center;
+  gap:24px;
+  direction:ltr;
+}
+.icon-button{
+  width:36px;
+  height:36px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:#111;
+}
+.icon-button svg{
+  width:31px;
+  height:31px;
+  stroke:currentColor;
+  fill:none;
+  stroke-width:1.7;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+}
 .menu-icon,.menu-icon svg{width:60px;height:36px}
 .menu-icon svg{stroke-width:2.2}
 
@@ -109,11 +143,11 @@ a{color:inherit;text-decoration:none}
   padding-top:20px;
 }
 
-/* --- هیرو --- */
+/* --- هیرو با هم‌ترازی از سمت چپ --- */
 .hero{
   width:94vw;
   max-width:1700px;
-  margin: 0 auto;
+  margin: 0 auto 0 0; /* از سمت چپ هیچ فاصله‌ای ندارد */
   position:relative;
   overflow:hidden;
   background:#111;
@@ -181,19 +215,15 @@ a{color:inherit;text-decoration:none}
 }
 
 /* --- چیدمان نهایی --- */
-
-/* ستون 1 (سمت راست کد / چپ تصویر شما) */
 .floating-icons a:nth-child(1){ grid-column: 1; grid-row: 1; } /* CV */
 .floating-icons a:nth-child(2){ grid-column: 1; grid-row: 2; } /* Shop */
 .floating-icons a:nth-child(3){ grid-column: 1; grid-row: 3; } /* Podcast */
 
-/* ستون 2 (وسط) */
 .floating-icons a:nth-child(4){ grid-column: 2; grid-row: 1; } /* Play */
 .floating-icons a:nth-child(5){ grid-column: 2; grid-row: 2; } /* Film */
 .floating-icons a:nth-child(6){ grid-column: 2; grid-row: 3; } /* Home */
 .floating-icons a:nth-child(7){ grid-column: 2; grid-row: 4; } /* Gallery */
 
-/* ستون 3 (سمت چپ کد / راست تصویر شما) */
 .floating-icons a:nth-child(8){ grid-column: 3; grid-row: 1; } /* Palette */
 .floating-icons a:nth-child(9){ grid-column: 3; grid-row: 2; } /* Theater */
 .floating-icons a:nth-child(10){ grid-column: 3; grid-row: 3; } /* Statue */
@@ -218,18 +248,17 @@ a{color:inherit;text-decoration:none}
 .menu-links{grid-template-columns:1fr}
 .menu-footer{padding-top:10px}
 
-.site-header{padding:0 4vw 0;}
-.topbar{height:65px}
+.site-header{padding:0 0 0 4vw;}
+.topbar{padding-right:4vw; height:65px}
 .brand{width:170px;height:50px}
 .header-actions{gap:10px}
 .icon-button{width:30px}.icon-button svg{width:27px;height:27px}
 .menu-icon,.menu-icon svg{width:43px}
 
-.hero{width:92vw; margin: 0 auto;}
+.hero{width:92vw;}
 .hero-image{aspect-ratio:16/10;object-position: center 25%;}
 .hero-overlay{padding:25px;background:linear-gradient(0deg, rgba(0,0,0,0.80) 0%, rgba(0,0,0,0.15) 75%);}
 
-/* --- تنظیمات تبلت --- */
 .floating-icons{
   top: 45%;
   left:12px;
@@ -237,11 +266,8 @@ a{color:inherit;text-decoration:none}
   row-gap: 10px;
   max-width:200px;
 }
-.floating-icons a{
-  width: 50px;
-  height: 50px;
-  border-radius:8px;
-}
+.floating-icons a{width: 50px; height: 50px; border-radius:8px;}
+
 .categories{width:92vw;grid-template-columns:repeat(2,1fr)}
 .category{border-bottom:1px solid var(--line);padding:18px 10px}.category:nth-child(2){border-left:0}
 }
@@ -251,7 +277,6 @@ a{color:inherit;text-decoration:none}
 .header-actions{gap:5px}
 .categories{grid-template-columns:1fr 1fr}.category-title{font-size:15px}
 
-/* --- تنظیمات موبایل --- */
 .floating-icons{
   top: 48%;
   left:6px;
@@ -259,12 +284,7 @@ a{color:inherit;text-decoration:none}
   row-gap: 6px;
   max-width:150px;
 }
-.floating-icons a{
-  width: 40px;
-  height: 40px;
-  border-radius:6px;
-  box-shadow:0 4px 12px rgba(0,0,0,0.25);
-}
+.floating-icons a{width: 40px; height: 40px; border-radius:6px; box-shadow:0 4px 12px rgba(0,0,0,0.25);}
 }
 </style>
 </head>
@@ -307,38 +327,22 @@ a{color:inherit;text-decoration:none}
 
 <main>
   <section class="hero">
-    
-    <!-- عکس هیرو -->
     <img class="hero-image" src="ferdows_archives_hero.png" alt="آرشیو سینمایی و پوسترهای آثار هنری">
-    
-    <!-- سایه‌ی هیرو -->
-    <div class="hero-overlay">
-    </div>
-
-    <!-- پنل آیکون‌ها با پادکست جدید -->
+    <div class="hero-overlay"></div>
     <div class="floating-icons">
-      
-      <!-- ستون 1: CV, Shop, Podcast -->
       <a href="#" aria-label="رزومه و CV"><img src="icon-cv.png" alt="CV"></a>
       <a href="#" aria-label="فروشگاه و خرید"><img src="icon-shop.png" alt="خرید"></a>
       <a href="#" aria-label="پادکست"><img src="icon-podcast.png" alt="پادکست"></a>
-      
-      <!-- ستون 2: Play, Film, Home, Gallery -->
       <a href="#" aria-label="پخش و ویدیو"><img src="icon-play.png" alt="پخش"></a>
       <a href="#" aria-label="فیلم و سینما"><img src="icon-film.png" alt="فیلم"></a>
       <a href="#" aria-label="خانه"><img src="icon-home.png" alt="خانه"></a>
       <a href="#" aria-label="گالری و نمایشگاه"><img src="icon-gallery.png" alt="گالری"></a>
-      
-      <!-- ستون 3: Palette, Theater, Statue, Music -->
       <a href="#" aria-label="پالت و هنرهای تجسمی"><img src="icon-palette.png" alt="پالت"></a>
       <a href="#" aria-label="تئاتر و نمایش"><img src="icon-theater.png" alt="تئاتر"></a>
       <a href="#" aria-label="مجسمه و هنرهای کلاسیک"><img src="icon-statue.png" alt="مجسمه"></a>
       <a href="#" aria-label="موسیقی"><img src="icon-music.png" alt="موسیقی"></a>
-
     </div>
-
   </section>
-
   <section class="categories">
     <a href="#" class="category">
       <div class="category-icon"><svg viewBox="0 0 40 40"><rect x="6" y="9" width="28" height="22" rx="2"></rect><path d="M10 14h20M10 19h12M10 24h17"></path></svg></div>
@@ -362,7 +366,6 @@ a{color:inherit;text-decoration:none}
     </a>
   </section>
 </main>
-
 <footer class="footer">
   <strong>آرشیو فردوس</strong>
   <p>ثبت امروز، ماندگاری فردا.</p>
