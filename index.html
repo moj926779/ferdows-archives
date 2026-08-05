@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ferdows Archives | فردوس آرکایوز</title>
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--red:#d00000;--black:#111;--gray:#777;--line:#ddd;--white:#fff}
+body{background:#fff;color:var(--black);font-family:"Vazirmatn","IRANSans",Tahoma,Arial,sans-serif}
+a{color:inherit;text-decoration:none}
+
+/* --- هدر --- */
+.site-header{
+  width:100%;
+  padding:0 3vw 0;
+  background:#fff;
+}
+.topbar{
+  height:72px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  direction:ltr;
+  border-bottom:1px solid var(--line);
+}
+
+.brand{width:210px;height:58px;display:flex;align-items:center;justify-content:flex-start}
+.brand img{width:100%;height:100%;object-fit:contain;object-position:left center;display:block}
+
+.header-actions{display:flex;align-items:center;gap:24px;direction:ltr}
+.icon-button{width:36px;height:36px;display:flex;align-items:center;justify-content:center;color:#111}
+.icon-button svg{width:31px;height:31px;stroke:currentColor;fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.menu-icon,.menu-icon svg{width:60px;height:36px}
+.menu-icon svg{stroke-width:2.2}
+
+.menu-toggle{
+  position:relative;
+  border:0;
+  background:transparent;
+  cursor:pointer;
+  padding:0;
+  flex-direction:column;
+  gap:7px;
+}
+.menu-toggle span{
+  display:block;
+  width:56px;
+  height:2px;
+  background:#111;
+  transition:transform .25s ease, opacity .2s ease;
+  transform-origin:center;
+}
+.menu-toggle.is-open span:nth-child(1){transform:translateY(9px) rotate(45deg)}
+.menu-toggle.is-open span:nth-child(2){opacity:0}
+.menu-toggle.is-open span:nth-child(3){transform:translateY(-9px) rotate(-45deg)}
+
+/* --- منوی کشویی --- */
+.menu-panel{
+  position:fixed;
+  z-index:1000;
+  top:91px;
+  right:3vw;
+  left:3vw;
+  background:#fff;
+  border-top:1px solid #ddd;
+  box-shadow:0 18px 45px rgba(0,0,0,.12);
+  transform:translateY(-18px);
+  opacity:0;
+  visibility:hidden;
+  transition:opacity .25s ease, transform .25s ease, visibility .25s ease;
+}
+.menu-panel.is-open{
+  transform:translateY(0);
+  opacity:1;
+  visibility:visible;
+}
+.menu-panel-inner{
+  padding:45px 5vw 38px;
+  display:grid;
+  grid-template-columns:.7fr 2fr;
+  gap:60px;
+  direction:rtl;
+}
+.menu-heading{
+  font-size:clamp(30px,4vw,58px);
+  font-weight:800;
+  color:var(--red);
+}
+.menu-links{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:18px 45px;
+}
+.menu-links a{
+  font-size:clamp(19px,2vw,29px);
+  border-bottom:1px solid #e5e5e5;
+  padding:10px 0 15px;
+  transition:color .2s ease;
+}
+.menu-links a:hover{color:var(--red)}
+.menu-footer{
+  grid-column:1 / -1;
+  direction:ltr;
+  color:#999;
+  font-size:11px;
+  letter-spacing:.18em;
+  padding-top:20px;
+}
+
+/* --- هیرو --- */
+.hero{
+  width:94vw;
+  max-width:1700px;
+  margin: 0 auto;
+  position:relative;
+  overflow:hidden;
+  background:#111;
+}
+
+.hero-image{
+  width:100%;
+  aspect-ratio:16/9;
+  height:auto;
+  object-fit:cover;
+  object-position: center 30%;
+  display:block;
+  filter: brightness(1.0) contrast(1.05);
+}
+
+/* --- سایه‌ی هیرو --- */
+.hero-overlay{
+  position:absolute;
+  inset:0;
+  display:flex;
+  align-items:flex-end;
+  justify-content:flex-start;
+  direction:rtl;
+  padding:clamp(25px,5vw,75px);
+  background:linear-gradient(90deg, rgba(0,0,0,0.70) 0%, rgba(0,0,0,0.25) 35%, rgba(0,0,0,0) 65%);
+}
+
+/* --- پنل آیکون‌ها --- */
+.floating-icons{
+  position:absolute;
+  top: 38%; 
+  left:clamp(15px, 2.5vw, 35px);
+  transform:translateY(-50%);
+  display:grid;
+  grid-template-columns: repeat(3, 1fr);
+  column-gap: 15px;
+  row-gap: 15px;
+  z-index:15;
+  max-width:280px;
+}
+
+/* کادر شفاف (شیشه‌ای) */
+.floating-icons a{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  width: 70px;
+  height: 70px;
+  background:transparent;
+  border:1px solid rgba(255,255,255,0.15);
+  box-shadow:0 0 15px rgba(0,0,0,0.3);
+  transition:all 0.3s ease;
+  border-radius:12px;
+}
+.floating-icons a:hover{
+  transform:scale(1.08);
+  border-color:rgba(255,255,255,0.4);
+  box-shadow:0 0 25px rgba(0,0,0,0.5);
+}
+.floating-icons a img{
+  width:100%;
+  height:100%;
+  object-fit:contain;
+  display:block;
+}
+
+/* --- چیدمان نهایی --- */
+
+/* ستون 1 (سمت راست کد / چپ تصویر شما) */
+.floating-icons a:nth-child(1){ grid-column: 1; grid-row: 1; } /* CV */
+.floating-icons a:nth-child(2){ grid-column: 1; grid-row: 2; } /* Shop */
+.floating-icons a:nth-child(3){ grid-column: 1; grid-row: 3; } /* Podcast */
+
+/* ستون 2 (وسط) */
+.floating-icons a:nth-child(4){ grid-column: 2; grid-row: 1; } /* Play */
+.floating-icons a:nth-child(5){ grid-column: 2; grid-row: 2; } /* Film */
+.floating-icons a:nth-child(6){ grid-column: 2; grid-row: 3; } /* Home */
+.floating-icons a:nth-child(7){ grid-column: 2; grid-row: 4; } /* Gallery */
+
+/* ستون 3 (سمت چپ کد / راست تصویر شما) */
+.floating-icons a:nth-child(8){ grid-column: 3; grid-row: 1; } /* Palette */
+.floating-icons a:nth-child(9){ grid-column: 3; grid-row: 2; } /* Theater */
+.floating-icons a:nth-child(10){ grid-column: 3; grid-row: 3; } /* Statue */
+.floating-icons a:nth-child(11){ grid-column: 3; grid-row: 4; } /* Music */
+
+/* ------------------------------------------------------------------ */
+
+.categories{width:94vw;max-width:1700px;margin:0 auto;padding:30px 0 20px;display:grid;grid-template-columns:repeat(4,1fr);direction:rtl}
+.category{min-height:90px;padding:0 28px;display:flex;flex-direction:column;align-items:center;justify-content:center;border-left:1px solid var(--line);text-align:center}
+.category:last-child{border-left:0}
+.category-icon{width:35px;height:35px;margin-bottom:9px}
+.category-icon svg{width:100%;height:100%;stroke:#111;fill:none;stroke-width:1.4;stroke-linecap:round;stroke-linejoin:round}
+.category-title{font-size:18px;margin-bottom:4px}
+.category-description{color:var(--gray);font-size:12px}
+
+.footer{width:94vw;max-width:1700px;margin:0 auto;border-top:1px solid var(--line);padding:20px 0 30px;text-align:center}
+.footer strong{font-size:17px}.footer p{margin-top:5px;color:var(--gray);font-size:12px}
+
+@media(max-width:850px){
+.menu-panel{top:77px;right:4vw;left:4vw}
+.menu-panel-inner{grid-template-columns:1fr;gap:25px;padding:30px 7vw}
+.menu-links{grid-template-columns:1fr}
+.menu-footer{padding-top:10px}
+
+.site-header{padding:0 4vw 0;}
+.topbar{height:65px}
+.brand{width:170px;height:50px}
+.header-actions{gap:10px}
+.icon-button{width:30px}.icon-button svg{width:27px;height:27px}
+.menu-icon,.menu-icon svg{width:43px}
+
+.hero{width:92vw; margin: 0 auto;}
+.hero-image{aspect-ratio:16/10;object-position: center 25%;}
+.hero-overlay{padding:25px;background:linear-gradient(0deg, rgba(0,0,0,0.80) 0%, rgba(0,0,0,0.15) 75%);}
+
+/* --- تنظیمات تبلت --- */
+.floating-icons{
+  top: 45%;
+  left:12px;
+  column-gap: 10px;
+  row-gap: 10px;
+  max-width:200px;
+}
+.floating-icons a{
+  width: 50px;
+  height: 50px;
+  border-radius:8px;
+}
+.categories{width:92vw;grid-template-columns:repeat(2,1fr)}
+.category{border-bottom:1px solid var(--line);padding:18px 10px}.category:nth-child(2){border-left:0}
+}
+
+@media(max-width:480px){
+.brand{width:140px}
+.header-actions{gap:5px}
+.categories{grid-template-columns:1fr 1fr}.category-title{font-size:15px}
+
+/* --- تنظیمات موبایل --- */
+.floating-icons{
+  top: 48%;
+  left:6px;
+  column-gap: 6px;
+  row-gap: 6px;
+  max-width:150px;
+}
+.floating-icons a{
+  width: 40px;
+  height: 40px;
+  border-radius:6px;
+  box-shadow:0 4px 12px rgba(0,0,0,0.25);
+}
+}
+</style>
+</head>
+
+<body>
+
+<header class="site-header">
+  <div class="topbar">
+    <a href="#" class="brand" aria-label="Ferdows Archives">
+      <img src="ferarch.svg" alt="Ferdows Archives">
+    </a>
+    <div class="header-actions">
+      <a href="#" class="icon-button" aria-label="حساب کاربری">
+        <svg viewBox="0 0 32 32"><circle cx="16" cy="9" r="6"></circle><path d="M5 29c.7-7 4.2-10.5 11-10.5S26.3 22 27 29"></path></svg>
+      </a>
+      <a href="#" class="icon-button" aria-label="خانه">
+        <svg viewBox="0 0 32 32"><path d="M4 14.5 16 4l12 10.5"></path><path d="M7 13v14h7v-8h4v8h7V13"></path></svg>
+      </a>
+      <button type="button" class="icon-button menu-icon menu-toggle" aria-label="باز کردن منو" aria-expanded="false" aria-controls="site-menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<div class="menu-panel" id="site-menu" aria-hidden="true">
+  <div class="menu-panel-inner">
+    <div class="menu-heading">آرشیو فردوس</div>
+    <nav class="menu-links">
+      <a href="#">آثار</a>
+      <a href="#">هنرمندان</a>
+      <a href="#">رشته‌ها</a>
+      <a href="#">منتخب آرشیو</a>
+      <a href="#">درباره آرشیو</a>
+      <a href="#">ارسال اثر</a>
+    </nav>
+    <div class="menu-footer">ARCHIVE / ART / STUDENTS</div>
+  </div>
+</div>
+
+<main>
+  <section class="hero">
+    
+    <!-- عکس هیرو -->
+    <img class="hero-image" src="ferdows_archives_hero.png" alt="آرشیو سینمایی و پوسترهای آثار هنری">
+    
+    <!-- سایه‌ی هیرو -->
+    <div class="hero-overlay">
+    </div>
+
+    <!-- پنل آیکون‌ها با پادکست جدید -->
+    <div class="floating-icons">
+      
+      <!-- ستون 1: CV, Shop, Podcast -->
+      <a href="#" aria-label="رزومه و CV"><img src="icon-cv.png" alt="CV"></a>
+      <a href="#" aria-label="فروشگاه و خرید"><img src="icon-shop.png" alt="خرید"></a>
+      <a href="#" aria-label="پادکست"><img src="icon-podcast.png" alt="پادکست"></a>
+      
+      <!-- ستون 2: Play, Film, Home, Gallery -->
+      <a href="#" aria-label="پخش و ویدیو"><img src="icon-play.png" alt="پخش"></a>
+      <a href="#" aria-label="فیلم و سینما"><img src="icon-film.png" alt="فیلم"></a>
+      <a href="#" aria-label="خانه"><img src="icon-home.png" alt="خانه"></a>
+      <a href="#" aria-label="گالری و نمایشگاه"><img src="icon-gallery.png" alt="گالری"></a>
+      
+      <!-- ستون 3: Palette, Theater, Statue, Music -->
+      <a href="#" aria-label="پالت و هنرهای تجسمی"><img src="icon-palette.png" alt="پالت"></a>
+      <a href="#" aria-label="تئاتر و نمایش"><img src="icon-theater.png" alt="تئاتر"></a>
+      <a href="#" aria-label="مجسمه و هنرهای کلاسیک"><img src="icon-statue.png" alt="مجسمه"></a>
+      <a href="#" aria-label="موسیقی"><img src="icon-music.png" alt="موسیقی"></a>
+
+    </div>
+
+  </section>
+
+  <section class="categories">
+    <a href="#" class="category">
+      <div class="category-icon"><svg viewBox="0 0 40 40"><rect x="6" y="9" width="28" height="22" rx="2"></rect><path d="M10 14h20M10 19h12M10 24h17"></path></svg></div>
+      <div class="category-title">تازه‌ها</div>
+      <div class="category-description">آخرین آثار ثبت‌شده در آرشیو</div>
+    </a>
+    <a href="#" class="category">
+      <div class="category-icon"><svg viewBox="0 0 40 40"><circle cx="20" cy="20" r="14"></circle><path d="M20 12v9l6 4"></path></svg></div>
+      <div class="category-title">منتخب آرشیو</div>
+      <div class="category-description">آثاری که ارزش ماندگاری دارند</div>
+    </a>
+    <a href="#" class="category">
+      <div class="category-icon"><svg viewBox="0 0 40 40"><path d="M7 31V12l13-6 13 6v19"></path><path d="M12 31V18h16v13M17 31v-7h6v7"></path></svg></div>
+      <div class="category-title">هنرمندان</div>
+      <div class="category-description">شناخت هنرمندان و پرونده آثارشان</div>
+    </a>
+    <a href="#" class="category">
+      <div class="category-icon"><svg viewBox="0 0 40 40"><circle cx="17" cy="17" r="9"></circle><path d="m24 24 9 9"></path><path d="M13 17h8"></path><path d="M17 13v8"></path></svg></div>
+      <div class="category-title">جست‌وجوی آثار</div>
+      <div class="category-description">پیدا کردن اثر، هنرمند یا رشته</div>
+    </a>
+  </section>
+</main>
+
+<footer class="footer">
+  <strong>آرشیو فردوس</strong>
+  <p>ثبت امروز، ماندگاری فردا.</p>
+</footer>
+
+<script>
+(function () {
+  const toggle = document.querySelector('.menu-toggle');
+  const panel = document.getElementById('site-menu');
+  if (!toggle || !panel) return;
+  toggle.addEventListener('click', function () {
+    const isOpen = toggle.classList.toggle('is-open');
+    panel.classList.toggle('is-open', isOpen);
+    toggle.setAttribute('aria-expanded', String(isOpen));
+    toggle.setAttribute('aria-label', isOpen ? 'بستن منو' : 'باز کردن منو');
+    panel.setAttribute('aria-hidden', String(!isOpen));
+  });
+  panel.querySelectorAll('a').forEach(function (link) {
+    link.addEventListener('click', function () {
+      toggle.classList.remove('is-open');
+      panel.classList.remove('is-open');
+      toggle.setAttribute('aria-expanded', 'false');
+      toggle.setAttribute('aria-label', 'باز کردن منو');
+      panel.setAttribute('aria-hidden', 'true');
+    });
+  });
+})();
+</script>
+
+</body>
+</html>
