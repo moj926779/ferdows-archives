@@ -140,7 +140,6 @@ a{color:inherit;text-decoration:none}
   padding:clamp(25px,5vw,75px);
   background:linear-gradient(90deg, rgba(0,0,0,0.70) 0%, rgba(0,0,0,0.25) 35%, rgba(0,0,0,0) 65%);
 }
-/* -------------------------------------------- */
 
 /* --- کتگوری‌ها (زوایای تیز، بدون گردی) --- */
 .categories{
@@ -187,14 +186,12 @@ a{color:inherit;text-decoration:none}
   margin-top:4px;
 }
 
-/* --- دسکتاپ (۲ ردیف ۴ تایی) --- */
-@media(min-width:851px){
-  .categories{
-    grid-template-columns: repeat(4, 1fr);
-  }
+/* --- دسکتاپ و موبایل (هر دو ۲ ردیف ۴ تایی) --- */
+.categories{
+  grid-template-columns: repeat(4, 1fr);
 }
 
-/* --- تبلت و موبایل (۴ ردیف ۲ تایی) --- */
+/* --- تنظیمات تبلت و موبایل (فقط سایزها کوچک‌تر می‌شوند) --- */
 @media(max-width:850px){
 .menu-panel{top:77px;right:4vw;left:4vw}
 .menu-panel-inner{grid-template-columns:1fr;gap:25px;padding:30px 7vw}
@@ -214,20 +211,23 @@ a{color:inherit;text-decoration:none}
 
 .categories{
   width:92vw;
-  grid-template-columns: repeat(2, 1fr);
-  gap:12px;
-  padding:0 6px;
+  gap:8px;
+  padding:0 4px;
 }
 .category{
-  min-height:110px;
-  padding:15px;
+  min-height:100px;
+  padding:12px 6px;
 }
 .category img{
-  width:55px;
-  height:55px;
+  width:40px;
+  height:40px;
+  margin-bottom:6px;
 }
 .category-title{
-  font-size:15px;
+  font-size:11px;
+}
+.category-description{
+  font-size:9px;
 }
 }
 
@@ -235,19 +235,22 @@ a{color:inherit;text-decoration:none}
 .brand{width:140px}
 .header-actions{gap:5px}
 .categories{
-  gap:10px;
-  padding:0 4px;
+  gap:6px;
+  padding:0 2px;
 }
 .category{
-  min-height:95px;
-  padding:12px;
+  min-height:85px;
+  padding:8px 4px;
 }
 .category img{
-  width:45px;
-  height:45px;
+  width:32px;
+  height:32px;
 }
 .category-title{
-  font-size:14px;
+  font-size:10px;
+}
+.category-description{
+  font-size:8px;
 }
 }
 </style>
@@ -295,6 +298,7 @@ a{color:inherit;text-decoration:none}
     <div class="hero-overlay"></div>
   </section>
 
+  <!-- ۲ ردیف ۴ تایی در کامپیوتر و موبایل -->
   <section class="categories">
     <a href="#" class="category">
       <img src="icon-cv.png" alt="CV">
