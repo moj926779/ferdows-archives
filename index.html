@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ferdows Archives | فردوس آرکایوز</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        :root {
+            --red: #d00000;
+            --black: #111;
+            --gray: #777;
+            --line: #ddd;
+            --white: #fff;
+        }
+        body {
+            background: var(--white);
+            color: var(--black);
+            font-family: "Vazirmatn", "IRANSans", Tahoma, Arial, sans-serif;
+        }
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        /* --- هدر --- */
+        .site-header {
+            width: 94%;
+            max-width: 1700px;
+            margin: 0 auto;
+            padding: 0 0 0;
+            background: var(--white);
+        }
+        .topbar {
+            height: 72px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            direction: ltr;
+            border-bottom: 1px solid var(--line);
+        }
+
+        .brand {
+            width: 190px;
+            height: 52px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+        }
+        .brand img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            object-position: left center;
+            display: block;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 22px;
+            direction: ltr;
+        }
+        .icon-button {
+            width: 34px;
+            height: 34px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--black);
+            background: transparent;
+            border: none;
+            cursor: pointer;
+        }
+        .icon-button svg {
+            width: 28px;
+            height: 28px;
+            stroke: currentColor;
+            fill: none;
+            stroke-width: 1.7;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        /* --- دکمه‌ی همبرگری (سه خط) --- */
+        .menu-icon {
+            position: relative;
+            width: 40px;
+            height: 26px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0;
+            border: none;
+            background: transparent;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .menu-icon span {
+            display: block;
+            width: 100%;
+            height: 2px;
+            background: var(--black);
+            transition: all 0.3s ease;
+            transform-origin: center;
+            border-radius: 2px;
+        }
+        .menu-icon.is-open span:nth-child(1) {
+            transform: translateY(12px) rotate(45deg);
+        }
+        .menu-icon.is-open span:nth-child(2) {
+            opacity: 0;
+            transform: scaleX(0);
+        }
+        .menu-icon.is-open span:nth-child(3) {
+            transform: translateY(-12px) rotate(-45deg);
+        }
+
+        /* --- منوی پیش‌فرض (لینک‌های داخلی) --- */
+        .default-menu {
+            position: fixed;
+            z-index: 999;
+            top: 73px;
+            right: 3vw;
+            left: 3vw;
+            background: var(--white);
+            border-top: 1px solid var(--line);
+            box-shadow: 0 18px 45px rgba(0,0,0,0.12);
+            transform: translateY(-18px);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+        .default-menu.is-open {
+            transform: translateY(0);
+            opacity: 1;
+            visibility: visible;
+        }
+        .default-menu-inner {
+            padding: 40px 5vw 35px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px 40px;
+            direction: rtl;
+        }
+        .default-menu-heading {
+            font-size: 30px;
+            font-weight: 800;
+            color: var(--red);
+        }
+        .default-menu-links {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px 30px;
+        }
+        .default-menu-links a {
+            font-size: 20px;
+            border-bottom: 1px solid #e5e5e5;
+            padding: 8px 0 12px;
+            transition: color 0.2s ease;
+        }
+        .default-menu-links a:hover {
+            color: var(--red);
+        }
+        .default-menu-footer {
+            grid-column: 1 / -1;
+            direction: ltr;
+            color: #999;
+            font-size: 11px;
+            letter-spacing: 0.18em;
+            padding-top: 20px;
+        }
+
+        /* --- نوار مشکی --- */
+        .black-bar {
+            width: 94%;
+            max-width: 1700px;
+            margin: 0 auto;
+            background: var(--black);
+            padding: 14px 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .black-bar-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: transform 0.2s ease;
+            width: 25%;
+            height: 100%;
+            padding: 0;
+        }
+        .black-bar-item:hover {
+            transform: scale(1.04);
+        }
+        .black-bar-item img {
+            width: 42px;
+            height: 42px;
+            object-fit: contain;
+            display: block;
+            margin-bottom: 4px;
+        }
+        .black-bar-item span {
+            color: var(--white);
+            font-size: 12px;
+            font-weight: 400;
+            text-align: center;
+        }
+
+        /* --- هیرو --- */
+        .hero {
+            width: 94%;
+            max-width: 1700px;
+            margin: 15px auto 0;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.4s ease;
+        }
+        .hero-image {
+            width: 100%;
+            height: auto;
+            aspect-ratio: 16/9;
+            object-fit: cover;
+            display: block;
+            object-position: center 30%;
+            transition: all 0.4s ease;
+        }
+        .hero-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.2) 100%);
+            pointer-events: none;
+            transition: all 0.4s ease;
+        }
+        .hero:hover .hero-overlay {
+            background: linear-gradient(to bottom, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.05) 100%);
+        }
+        .hero:hover .hero-image {
+            filter: brightness(1.1) contrast(1.05) saturate(1.05);
+            transform: scale(1.01);
+        }
+
+        /* --- دکمه «فیلد هنری» --- */
+        .field-tab {
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--white);
+            color: var(--black);
+            padding: 20px 12px;
+            z-index: 20;
+            min-height: 180px;
+            box-shadow: 2px 0 10px rgba(0,0,0,0.05);
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        .field-tab:hover {
+            background: #f5f5f5;
+            transform: translateY(-50%) translateX(2px);
+            box-shadow: 3px 0 14px rgba(0,0,0,0.08);
+        }
+
+        /* --- منوی کشویی فیلد هنری --- */
+        .field-menu {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(4px);
+            z-index: 30;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 2vw;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.4s ease;
+            pointer-events: none;
+        }
+        .field-menu.is-open {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+        }
+
+        /* دکمه بستن منوی فیلد هنری */
+        .field-menu-close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: transparent;
+            border: none;
+            font-size: 28px;
+            cursor: pointer;
+            color: var(--black);
+            z-index: 40;
+            transition: transform 0.2s ease;
+            line-height: 1;
+            padding: 5px 8px;
+            border-radius: 4px;
+        }
+        .field-menu-close:hover {
+            transform: scale(1.2);
+            background: rgba(0,0,0,0.05);
+        }
+
+        /* --- چیدمان دسکتاپ (۲ ردیف ۴ تایی) --- */
+        .field-menu-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1.5vw;
+            width: 100%;
+            max-width: 900px;
+            margin: 0 auto;
+            direction: rtl;
+        }
+        .field-menu-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            color: var(--black);
+            transition: transform 0.2s ease;
+            padding: 1vw 0;
+            border-radius: 12px;
+            width: calc(25% - 1.5vw);
+            min-width: 80px;
+        }
+        .field-menu-item:hover {
+            transform: scale(1.05);
+            background: rgba(0, 0, 0, 0.03);
+        }
+        .field-menu-item img {
+            width: 55px;
+            height: 55px;
+            object-fit: contain;
+            display: block;
+            margin-bottom: 8px;
+        }
+        .field-menu-item span {
+            font-size: 15px;
+            font-weight: 500;
+            text-align: center;
+        }
+
+        /* --- چیدمان موبایل و تبلت --- */
+        @media (max-width: 850px) {
+            .site-header {
+                width: 96%;
+            }
+            .topbar {
+                height: 62px;
+            }
+            .brand {
+                width: 150px;
+                height: 44px;
+            }
+            .header-actions {
+                gap: 12px;
+            }
+            .icon-button {
+                width: 28px;
+                height: 28px;
+            }
+            .icon-button svg {
+                width: 24px;
+                height: 24px;
+            }
+
+            /* دکمه همبرگری در موبایل و تبلت (کوچک‌تر) */
+            .menu-icon {
+                width: 30px;
+                height: 18px;
+            }
+            .menu-icon span {
+                height: 1.5px;
+            }
+            .menu-icon.is-open span:nth-child(1) {
+                transform: translateY(8px) rotate(45deg);
+            }
+            .menu-icon.is-open span:nth-child(3) {
+                transform: translateY(-8px) rotate(-45deg);
+            }
+
+            .black-bar {
+                width: 96%;
+            }
+            .black-bar-item img {
+                width: 38px;
+                height: 38px;
+            }
+            .black-bar-item span {
+                font-size: 11px;
+            }
+
+            .hero {
+                width: 96%;
+                margin: 10px auto 0;
+            }
+            .hero-image {
+                aspect-ratio: 16/10;
+                object-position: center 25%;
+            }
+
+            .default-menu {
+                top: 63px;
+                right: 2vw;
+                left: 2vw;
+            }
+            .default-menu-inner {
+                grid-template-columns: 1fr;
+                gap: 25px;
+                padding: 30px 7vw;
+            }
+            .default-menu-links {
+                grid-template-columns: 1fr;
+            }
+            .default-menu-footer {
+                padding-top: 10px;
+            }
+
+            .field-tab {
+                padding: 14px 8px;
+                min-height: 120px;
+                box-shadow: 1px 0 6px rgba(0,0,0,0.05);
+            }
+            .field-tab:hover {
+                transform: translateY(-50%) translateX(1px);
+            }
+
+            .field-menu {
+                padding: 3vw;
+            }
+            .field-menu-grid {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 2vw;
+                max-width: 600px;
+                margin: 0 auto;
+                direction: rtl;
+            }
+            .field-menu-item {
+                width: 100%;
+                padding: 1.5vw 0;
+                border-radius: 8px;
+            }
+            .field-menu-item img {
+                width: 45px;
+                height: 45px;
+                margin-bottom: 6px;
+            }
+            .field-menu-item span {
+                font-size: 13px;
+            }
+
+            .field-menu-close {
+                top: 10px;
+                right: 10px;
+                font-size: 24px;
+                padding: 4px 6px;
+            }
+        }
+
+        /* --- تنظیمات موبایل --- */
+        @media (max-width: 550px) {
+            .brand {
+                width: 130px;
+                height: 40px;
+            }
+            .header-actions {
+                gap: 8px;
+            }
+
+            .black-bar {
+                width: 97%;
+            }
+            .black-bar-item img {
+                width: 30px;
+                height: 30px;
+                margin-bottom: 3px;
+            }
+            .black-bar-item span {
+                font-size: 9px;
+            }
+
+            .hero {
+                width: 97%;
+                margin: 7px auto 0;
+            }
+            .hero-image {
+                aspect-ratio: 16/9;
+                object-position: center 20%;
+            }
+
+            .default-menu {
+                top: 55px;
+                right: 1.5vw;
+                left: 1.5vw;
+            }
+            .default-menu-inner {
+                padding: 25px 5vw 20px;
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+            .default-menu-links {
+                grid-template-columns: 1fr;
+                gap: 10px;
+            }
+            .default-menu-links a {
+                font-size: 16px;
+                padding: 6px 0 10px;
+            }
+            .default-menu-footer {
+                padding-top: 8px;
+            }
+
+            .field-tab {
+                padding: 10px 6px;
+                min-height: 90px;
+            }
+            .field-tab:hover {
+                transform: translateY(-50%) translateX(0.5px);
+            }
+
+            .field-menu {
+                padding: 2vw;
+            }
+            .field-menu-grid {
+                gap: 1.5vw;
+                max-width: 100%;
+            }
+            .field-menu-item img {
+                width: 35px;
+                height: 35px;
+                margin-bottom: 4px;
+            }
+            .field-menu-item span {
+                font-size: 11px;
+            }
+
+            .field-menu-close {
+                top: 8px;
+                right: 8px;
+                font-size: 20px;
+                padding: 2px 4px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="site-header">
+        <div class="topbar">
+            <a href="#" class="brand" aria-label="Ferdows Archives">
+                <img src="ferarch.svg" alt="Ferdows Archives">
+            </a>
+            <div class="header-actions">
+                <button class="icon-button" aria-label="جستجو">
+                    <svg viewBox="0 0 32 32">
+                        <circle cx="14" cy="14" r="10"></circle>
+                        <path d="M21 21l6 6"></path>
+                    </svg>
+                </button>
+                <a href="#" class="icon-button" aria-label="حساب کاربری">
+                    <svg viewBox="0 0 32 32">
+                        <circle cx="16" cy="9" r="6"></circle>
+                        <path d="M5 29c.7-7 4.2-10.5 11-10.5S26.3 22 27 29"></path>
+                    </svg>
+                </a>
+                <a href="#" class="icon-button" aria-label="خانه">
+                    <svg viewBox="0 0 32 32">
+                        <path d="M4 14.5 16 4l12 10.5"></path>
+                        <path d="M7 13v14h7v-8h4v8h7V13"></path>
+                    </svg>
+                </a>
+                
+                <button type="button" class="menu-icon" aria-label="باز کردن منو" aria-expanded="false">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <div class="black-bar">
+        <a href="#" class="black-bar-item">
+            <img src="icon-cv.png" alt="رزومه">
+            <span>رزومه</span>
+        </a>
+        <a href="#" class="black-bar-item">
+            <img src="icon-podcast.png" alt="پادکست">
+            <span>پادکست</span>
+        </a>
+        <a href="#" class="black-bar-item">
+            <img src="icon-social.png" alt="اجتماعی">
+            <span>اجتماعی</span>
+        </a>
+        <a href="#" class="black-bar-item">
+            <img src="icon-shop.png" alt="فروشگاه">
+            <span>فروشگاه</span>
+        </a>
+    </div>
+
+    <section class="hero">
+        <img class="hero-image" src="ferdows_archives_hero.png" alt="آرشیو سینمایی و هنرهای دیجیتال">
+        <div class="hero-overlay"></div>
+        
+        <a href="#" class="field-tab" id="fieldTabBtn">
+            <span>فیلد هنری</span>
+        </a>
+
+        <div class="field-menu" id="fieldMenu">
+            <button class="field-menu-close" id="fieldMenuClose">✕</button>
+            
+            <div class="field-menu-grid">
+                <a href="#" class="field-menu-item">
+                    <img src="icon-film.png" alt="سینما">
+                    <span>سینما</span>
+                </a>
+                <a href="#" class="field-menu-item">
+                    <img src="icon-theater.png" alt="ادبیات نمایشی">
+                    <span>ادبیات نمایشی</span>
+                </a>
+                <a href="#" class="field-menu-item">
+                    <img src="icon-palette.png" alt="نقاشی">
+                    <span>نقاشی</span>
+                </a>
+
+                <a href="#" class="field-menu-item">
+                    <img src="icon-music.png" alt="موسیقی">
+                    <span>موسیقی</span>
+                </a>
+                <a href="#" class="field-menu-item">
+                    <img src="icon-gallery.png" alt="ارتباط تصویری">
+                    <span>ارتباط تصویری</span>
+                </a>
+                <a href="#" class="field-menu-item">
+                    <img src="icon-statue.png" alt="مجسمه‌سازی">
+                    <span>مجسمه‌سازی</span>
+                </a>
+
+                <a href="#" class="field-menu-item">
+                    <img src="icon-play.png" alt="چندرسانه‌ای">
+                    <span>چندرسانه‌ای</span>
+                </a>
+                <a href="#" class="field-menu-item">
+                    <img src="icon-more.png" alt="بیشتر">
+                    <span>بیشتر</span>
+                </a>
+                <div class="field-menu-item" style="visibility:hidden; pointer-events:none;"></div>
+            </div>
+        </div>
+    </section>
+
+    <div class="default-menu" id="defaultMenu" aria-hidden="true">
+        <div class="default-menu-inner">
+            <div class="default-menu-heading">آرشیو فردوس</div>
+            <nav class="default-menu-links">
+                <a href="#">آثار</a>
+                <a href="#">هنرمندان</a>
+                <a href="#">رشته‌ها</a>
+                <a href="#">منتخب آرشیو</a>
+                <a href="#">درباره آرشیو</a>
+                <a href="#">ارسال اثر</a>
+            </nav>
+            <div class="default-menu-footer">ARCHIVE / ART / STUDENTS</div>
+        </div>
+    </div>
+
+    <script>
+        // --- جاوا اسکریپت برای منوی همبرگری (سه خط) ---
+        (function() {
+            const toggle = document.querySelector('.menu-icon');
+            const panel = document.getElementById('defaultMenu');
+
+            if (!toggle || !panel) return;
+
+            toggle.addEventListener('click', function() {
+                const isOpen = toggle.classList.toggle('is-open');
+                panel.classList.toggle('is-open', isOpen);
+                toggle.setAttribute('aria-expanded', String(isOpen));
+                toggle.setAttribute('aria-label', isOpen ? 'بستن منو' : 'باز کردن منو');
+                panel.setAttribute('aria-hidden', String(!isOpen));
+            });
+
+            panel.querySelectorAll('a').forEach(function(link) {
+                link.addEventListener('click', function() {
+                    toggle.classList.remove('is-open');
+                    panel.classList.remove('is-open');
+                    toggle.setAttribute('aria-expanded', 'false');
+                    toggle.setAttribute('aria-label', 'باز کردن منو');
+                    panel.setAttribute('aria-hidden', 'true');
+                });
+            });
+        })();
+
+        // --- جاوا اسکریپت برای منوی فیلد هنری ---
+        (function() {
+            const tabBtn = document.getElementById('fieldTabBtn');
+            const fieldMenu = document.getElementById('fieldMenu');
+            const closeBtn = document.getElementById('fieldMenuClose');
+
+            if (!tabBtn || !fieldMenu || !closeBtn) return;
+
+            tabBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                fieldMenu.classList.add('is-open');
+            });
+
+            closeBtn.addEventListener('click', function() {
+                fieldMenu.classList.remove('is-open');
+            });
+
+            document.addEventListener('click', function(e) {
+                if (fieldMenu.classList.contains('is-open')) {
+                    if (!fieldMenu.contains(e.target) && e.target !== tabBtn && !tabBtn.contains(e.target)) {
+                        fieldMenu.classList.remove('is-open');
+                    }
+                }
+            });
+        })();
+    </script>
+
+</body>
+</html>
